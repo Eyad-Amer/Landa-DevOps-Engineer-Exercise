@@ -79,6 +79,31 @@ please have prerequisites installed on your computer.
 ------------
 `<link>` : https://www.nuget.org/
 
+#### 12. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
+------------
+
+#### 13. Push the NuGet package into the DemoFeed in Azure Artifacts
+------------
+
+#### 14. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
+------------
+
+#### 15. Read the nuspec file again and write to console the (new) version from the file
+------------
+
+#### 16. Write a PowerShell function so each output line in the console will have a timestamp prefix
+------------
+
+#### 17. finally, Run the PowerShell script and saved it in the Git repo
+
+
+
+
+
+
+
+
+
 
 
 
