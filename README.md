@@ -78,21 +78,59 @@ please have prerequisites installed on your computer.
 #### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository
 ------------
 `<link>` : https://www.nuget.org/
+	# restore NuGet package AutoMapper version 12.0.1
+	$nupkgName = "AutoMapper.12.0.1.nupkg"
+	$nugetUrl = "https://www.nuget.org/api/v2/package/AutoMapper/12.0.1"
+	$nugetFolderPath = "$PSScriptRoot\packages"
+
+	# create packages folder if it doesn't exist
+	if (-not (Test-Path $nugetFolderPath)) {
+    New-Item -ItemType Directory -Path $nugetFolderPath | Out-Null
+	}
+
+	# download NuGet package if it doesn't exist
+	$nupkgPath = Join-Path $nugetFolderPath $nupkgName
+	if (-not (Test-Path $nupkgPath)) {
+    Write-TimestampedOutput "Downloading NuGet package from $nugetUrl ..."
+    Invoke-WebRequest -Uri $nugetUrl -OutFile $nupkgPath
+	}
 
 #### 12. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
 ------------
+	# read the version from the nuspec file and write to console
+	$nuspecPath = Join-Path $nugetFolderPath "AutoMapper.12.0.1.nuspec"
+	Expand-Archive -Path $nupkgPath -DestinationPath $nugetFolderPath -Force
+	[xml]$nuspec = Get-Content $nuspecPath
+	$version = $nuspec.package.metadata.version
+	Write-TimestampedOutput "The version of the NuGet package is $version"
 
 #### 13. Push the NuGet package into the DemoFeed in Azure Artifacts
 ------------
+	# push NuGet package into DemoFeed in Azure Artifacts
+	$feedUrl = "https://pkgs.dev.azure.com/LandaExerciseOrg/_packaging/DemoFeed/nuget/v3/index.json"
+	$apiKey = "tqo467kb475tlziy6iagfkiuvg3l6yol4ywsxxiejznpxpvypb4q"
+	Write-TimestampedOutput "Pushing NuGet package to $feedUrl ..."
+	nuget.exe push $nupkgPath -Source $feedUrl -ApiKey $apiKey
 
 #### 14. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
 ------------
+	# change version of nuspec file to 14.1.3
+	$newVersion = "14.1.3"
+	$nuspec.package.metadata.version = $newVersion
+	$nuspec.Save($nuspecPath)
 
 #### 15. Read the nuspec file again and write to console the (new) version from the file
 ------------
+	# read new version from nuspec file and write to console
+	[xml]$nuspec = Get-Content $nuspecPath
+	$version = $nuspec.package.metadata.version
+	Write-TimestampedOutput "The new version of the NuGet package is $version"
 
 #### 16. Write a PowerShell function so each output line in the console will have a timestamp prefix
 ------------
+	function Write-TimestampedOutput($message) {
+    Write-Host ("[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $message)
+}
 
 #### 17. finally, Run the PowerShell script and saved it in the Git repo
 
