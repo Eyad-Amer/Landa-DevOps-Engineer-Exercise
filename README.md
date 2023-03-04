@@ -69,6 +69,17 @@ please have prerequisites installed on your computer.
 - Run the command: `<git config --global user.password "your PAT">`
 <img width="672" alt="confige Git credentials" src="https://user-images.githubusercontent.com/40535130/222918881-0f52f36f-b8ac-43e4-b463-a9747c64784d.png">
 
+#### 10. Edit the PowerShell script file in a PowerShell editor
+------------
+- Open your preferred PowerShell editor
+- edit the PowerShell script file readnugetversion.ps1 in a PowerShell editor
+<img width="859" alt="Edit powershell file into powershell editor" src="https://user-images.githubusercontent.com/40535130/222919112-690d7958-fbf5-4b5f-aa02-20073c188d48.png">
+
+#### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository
+------------
+`<link>` : https://www.nuget.org/
+
+
 
 
 
