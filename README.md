@@ -1,6 +1,6 @@
 ## Landa-DevOps-Engineer-Exercise
-DevOps Engineer Exercise
-The exercise aims to work with Azure DevOps, PowerShell, and NuGet package management.
+- DevOps Engineer Exercise
+- The exercise aims to work with Azure DevOps, PowerShell, and NuGet package management.
 
 #### Installation
 ------------
