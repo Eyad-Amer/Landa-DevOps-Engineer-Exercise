@@ -57,8 +57,21 @@ please have prerequisites installed on your computer.
 ------------
 - Open the command line on your computer.
 - Navigate to the folder where you want to clone the repository.
-- Run the command: git clone '<repository URL>'
+- Run the command: `<git clone  "repository URL">`
 - Enter your Azure DevOps username and PAT when prompted.
+<img width="672" alt="clone git repo" src="https://user-images.githubusercontent.com/40535130/222918004-d3c89f74-c7c6-4870-83b2-28ed499affda.png">
+
+#### 9. Configure your Git credentials to use your Azure DevOps PAT
+------------
+- Run the command: `<git config --global credential.helper store>`
+- Run the command: `<git config --global user.email "your email address">`
+- Run the command: `<git config --global user.name "your name">`
+- Run the command: `<git config --global user.password "your PAT">`
+<img width="672" alt="confige Git credentials" src="https://user-images.githubusercontent.com/40535130/222918881-0f52f36f-b8ac-43e4-b463-a9747c64784d.png">
+
+
+
+
 
 
 
