@@ -75,9 +75,8 @@ please have prerequisites installed on your computer.
 - edit the PowerShell script file readnugetversion.ps1 in a PowerShell editor
 <img width="859" alt="Edit powershell file into powershell editor" src="https://user-images.githubusercontent.com/40535130/222919112-690d7958-fbf5-4b5f-aa02-20073c188d48.png">
 
-#### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository
+#### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
 ------------
-`<link>` : https://www.nuget.org/
 	# restore NuGet package AutoMapper version 12.0.1
 	$nupkgName = "AutoMapper.12.0.1.nupkg"
 	$nugetUrl = "https://www.nuget.org/api/v2/package/AutoMapper/12.0.1"
