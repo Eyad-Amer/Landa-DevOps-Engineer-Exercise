@@ -1,9 +1,9 @@
-## Landa-DevOps-Engineer-Exercise
+# Landa-DevOps-Engineer-Exercise
 ![landa-logo](https://user-images.githubusercontent.com/40535130/222986173-af4db030-892e-4051-8d7d-00fbc8a346d2.jpg)
 
 
-- The objective of the task is to utilize Azure DevOps, PowerShell, and NuGet package management in conjunction.
-#### Installation
+#### - The objective of the task is to utilize Azure DevOps, PowerShell, and NuGet package management in conjunction.
+### Installation
 ------------
 Please ensure that the necessary prerequisites are installed on your computer.
 - PowerShell (based on windows 10 or above)
@@ -43,37 +43,29 @@ Please ensure that the necessary prerequisites are installed on your computer.
 #### 7. Refer to the appropriate documentation and set up the necessary credentials in Azure DevOps.
 ------------
 - To clone, pull, and push to a Git repository in Azure DevOps from your local drive, you will need to perform the following steps:
-Create a Personal Access Token (PAT) in Azure DevOps:
+- Create a Personal Access Token (PAT) in Azure DevOps:
 a. Login to your Azure DevOps account and navigate to your profile settings.
 b. Click on the "Personal access tokens" option from the left-hand menu.
 c. Click on the "New Token" button to create a new PAT.
 d. Give your token a name and select the appropriate scopes for your needs.
 e. Click on the "Create" button to generate the token.
 f. Copy the generated token as it will not be displayed again.
-<img width="364" alt="personal access token" src="https://user-images.githubusercontent.com/40535130/222915960-188515c1-1bf3-4f39-ac4f-0abd4ec185c6.png">
-- Click on "New Token" button.
-- Enter a name for your token.
-- Select the desired expiration date for the token.
-- Check the "Full Access" checkbox under "Scope".
-- Click on the "Create" button.
-<img width="858" alt="new token" src="https://user-images.githubusercontent.com/40535130/222916215-9fcc21d2-3868-4c47-b9bc-788e4c909a96.png">
+![token](https://user-images.githubusercontent.com/40535130/222990466-677ec7c5-703d-4b5e-b8ec-edf095dc6ed6.png)
 - When you're done, copy the token and store it in a secure location. For your security, it won't be shown again.
 
-#### 8. Clone the Git repo to your local drive
-------------
-- Open the command line on your computer.
-- Navigate to the folder where you want to clone the repository.
-- Run the command: `<git clone  "repository URL">`
-- Enter your Azure DevOps username and PAT when prompted.
-<img width="672" alt="clone git repo" src="https://user-images.githubusercontent.com/40535130/222918004-d3c89f74-c7c6-4870-83b2-28ed499affda.png">
+- Open the command line on your computer and navigate to the folder where you want to clone the repository.
 
-#### 9. Configure your Git credentials to use your Azure DevOps PAT
-------------
-- Run the command: `<git config --global credential.helper store>`
+- Clone the repository by running the following command:
+`git clone https://Landa-ExerciseOrg@dev.azure.com/Landa-ExerciseOrg/ExerciseProject/_git/ExerciseProject`
+
+<img width="863" alt="clone" src="https://user-images.githubusercontent.com/40535130/222990907-af368d7b-938d-4940-aa0b-cf4f32d6170b.png">
+
+- When prompted for credentials, enter your Azure DevOps useremail, username and PAT as the password.
 - Run the command: `<git config --global user.email "your email address">`
 - Run the command: `<git config --global user.name "your name">`
 - Run the command: `<git config --global user.password "your PAT">`
-<img width="672" alt="confige Git credentials" src="https://user-images.githubusercontent.com/40535130/222918881-0f52f36f-b8ac-43e4-b463-a9747c64784d.png">
+<img width="1098" alt="config" src="https://user-images.githubusercontent.com/40535130/222991562-b99888b2-cf5f-4c39-8fc3-834113772c24.png">
+
 
 #### 10. Edit the PowerShell script file in a PowerShell editor
 ------------
