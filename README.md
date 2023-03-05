@@ -1,49 +1,55 @@
 ## Landa-DevOps-Engineer-Exercise
-- DevOps Engineer Exercise
-- The exercise aims to work with Azure DevOps, PowerShell, and NuGet package management.
+![landa-logo](https://user-images.githubusercontent.com/40535130/222986173-af4db030-892e-4051-8d7d-00fbc8a346d2.jpg)
 
+
+- The objective of the task is to utilize Azure DevOps, PowerShell, and NuGet package management in conjunction.
 #### Installation
 ------------
-please have prerequisites installed on your computer.
+Please ensure that the necessary prerequisites are installed on your computer.
 - PowerShell (based on windows 10 or above)
 - Git 2.38 or above
 - NuGet.exe version 6.2.2.1
 
 #### 1. Create your own free account in Azure DevOps
 ------------
-`<link>` : [http://dev.azure.com/](http://dev.azure.com/)
+`<Azure DevOps>` : [http://dev.azure.com/](http://dev.azure.com/)
 <img width="801" alt="Create account in Azure DevOps" src="https://user-images.githubusercontent.com/40535130/222896757-c4152a47-3361-439c-834f-aef2d6e90f92.png">
 
 #### 2. Create a new organization
 ------------
-- Create a new Azure DevOps organization, named: "LandaExerciseOrg"
-<img width="859" alt="create new organization" src="https://user-images.githubusercontent.com/40535130/222896841-808b0f35-99d7-4dcf-8d1e-12fc9b0f9012.png">
+- Generate a new Azure DevOps organization with the name "Landa-ExerciseOrg".
+<img width="330" alt="Create organization" src="https://user-images.githubusercontent.com/40535130/222986831-4bbdc23d-edb5-47a0-b281-fd823b8d009b.png">
 
 #### 3. Create a new project
 ------------
-- Create a new Azure DevOps project, named: "ExerciseProject".
-<img width="858" alt="create new projects" src="https://user-images.githubusercontent.com/40535130/222897149-73644be7-110e-494f-94d2-963a67366c38.png">
+- Generate a new Azure DevOps project, named: "ExerciseProject".
+<img width="427" alt="Create project" src="https://user-images.githubusercontent.com/40535130/222986914-3bd9e772-0e19-4b79-a1ea-e848380585ee.png">
 
 #### 4. Initialize a new Git repo
 ------------
-- Create a new repository in the project, named: "ExerciseProject".
-<img width="857" alt="Initialize Git repo" src="https://user-images.githubusercontent.com/40535130/222897353-1ccf56f2-cfcb-4edc-8f28-64daf8159515.png">
-
+- Generate a new repository in the project.
+<img width="857" alt="Initialize git repo" src="https://user-images.githubusercontent.com/40535130/222986988-f4de1fb5-2d8e-456d-9f8a-7af73cc2be58.png">
 
 #### 5. Create a feed in Azure Artifacts
 ------------
-- Create a new feed in Azure Artifacts, named: "DemoFeed".
-<img width="859" alt="Create feed in Artifacts" src="https://user-images.githubusercontent.com/40535130/222897445-eb4ff102-c639-46e3-848e-936a44dd0105.png">
-
+- Generate a new feed in Azure Artifacts with the name "DemoFeed".
+<img width="858" alt="create feed" src="https://user-images.githubusercontent.com/40535130/222987206-5a359135-475d-48d6-be63-1334fbbcfafc.png">
 
 #### 6. Create a new PowerShell file in the Git repo
 ------------
-- Create a new PowerShell file in the Git repo, named: "readnugetversion.ps1"
-![create Powershell file full steps](https://user-images.githubusercontent.com/40535130/222897619-4132e368-156e-4257-903b-8286d124c51d.png)
+- Create a new PowerShell file in the Git repository and name it "readnugetversion.ps1".
+![create powershell file](https://user-images.githubusercontent.com/40535130/222987504-787ededd-3449-4b66-bc46-5e6d84f398ae.png)
 
-#### 7. To clone/pull/push to your local drive in Azure DevOps, you need to Generate personal access token (PAT) 
+#### 7. Refer to the appropriate documentation and set up the necessary credentials in Azure DevOps.
 ------------
-- From your home page, open user settings  and select Personal access tokens.
+- To clone, pull, and push to a Git repository in Azure DevOps from your local drive, you will need to perform the following steps:
+Create a Personal Access Token (PAT) in Azure DevOps:
+a. Login to your Azure DevOps account and navigate to your profile settings.
+b. Click on the "Personal access tokens" option from the left-hand menu.
+c. Click on the "New Token" button to create a new PAT.
+d. Give your token a name and select the appropriate scopes for your needs.
+e. Click on the "Create" button to generate the token.
+f. Copy the generated token as it will not be displayed again.
 <img width="364" alt="personal access token" src="https://user-images.githubusercontent.com/40535130/222915960-188515c1-1bf3-4f39-ac4f-0abd4ec185c6.png">
 - Click on "New Token" button.
 - Enter a name for your token.
