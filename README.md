@@ -66,12 +66,12 @@ f. Copy the generated token as it will not be displayed again.
 - Run the command: `<git config --global user.password "your PAT">`
 <img width="1098" alt="config" src="https://user-images.githubusercontent.com/40535130/222991562-b99888b2-cf5f-4c39-8fc3-834113772c24.png">
 
-
-#### 10. Edit the PowerShell script file in a PowerShell editor
+#### 8. Edit the PowerShell script file in a PowerShell editor
 ------------
 - Open your preferred PowerShell editor
 - edit the PowerShell script file readnugetversion.ps1 in a PowerShell editor
-<img width="859" alt="Edit powershell file into powershell editor" src="https://user-images.githubusercontent.com/40535130/222919112-690d7958-fbf5-4b5f-aa02-20073c188d48.png">
+<img width="853" alt="powershell editor" src="https://user-images.githubusercontent.com/40535130/222991828-350c14c2-4292-49c9-a3d5-b39f1e4fa3d0.png">
+
 
 #### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
 ------------
