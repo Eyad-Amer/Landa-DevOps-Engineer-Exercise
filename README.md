@@ -10,37 +10,37 @@ Please ensure that the necessary prerequisites are installed on your computer.
 - Git 2.38 or above
 - NuGet.exe version 6.2.2.1
 
-#### 1. Create your own free account in Azure DevOps
+### 1. Create your own free account in Azure DevOps
 ------------
 `<Azure DevOps>` : [http://dev.azure.com/](http://dev.azure.com/)
 <img width="801" alt="Create account in Azure DevOps" src="https://user-images.githubusercontent.com/40535130/222896757-c4152a47-3361-439c-834f-aef2d6e90f92.png">
 
-#### 2. Create a new organization
+### 2. Create a new organization
 ------------
 - Generate a new Azure DevOps organization with the name "Landa-ExerciseOrg".
 <img width="330" alt="Create organization" src="https://user-images.githubusercontent.com/40535130/222986831-4bbdc23d-edb5-47a0-b281-fd823b8d009b.png">
 
-#### 3. Create a new project
+### 3. Create a new project
 ------------
 - Generate a new Azure DevOps project, named: "ExerciseProject".
 <img width="427" alt="Create project" src="https://user-images.githubusercontent.com/40535130/222986914-3bd9e772-0e19-4b79-a1ea-e848380585ee.png">
 
-#### 4. Initialize a new Git repo
+### 4. Initialize a new Git repo
 ------------
 - Generate a new repository in the project.
 <img width="857" alt="Initialize git repo" src="https://user-images.githubusercontent.com/40535130/222986988-f4de1fb5-2d8e-456d-9f8a-7af73cc2be58.png">
 
-#### 5. Create a feed in Azure Artifacts
+### 5. Create a feed in Azure Artifacts
 ------------
 - Generate a new feed in Azure Artifacts with the name "DemoFeed".
 <img width="858" alt="create feed" src="https://user-images.githubusercontent.com/40535130/222987206-5a359135-475d-48d6-be63-1334fbbcfafc.png">
 
-#### 6. Create a new PowerShell file in the Git repo
+### 6. Create a new PowerShell file in the Git repo
 ------------
 - Create a new PowerShell file in the Git repository and name it "readnugetversion.ps1".
 ![create powershell file](https://user-images.githubusercontent.com/40535130/222987504-787ededd-3449-4b66-bc46-5e6d84f398ae.png)
 
-#### 7. Refer to the appropriate documentation and set up the necessary credentials in Azure DevOps.
+### 7. Refer to the appropriate documentation and set up the necessary credentials in Azure DevOps.
 ------------
 - To clone, pull, and push to a Git repository in Azure DevOps from your local drive, you will need to perform the following steps:
 - Create a Personal Access Token (PAT) in Azure DevOps:
@@ -66,14 +66,14 @@ f. Copy the generated token as it will not be displayed again.
 - Run the command: `<git config --global user.password "your PAT">`
 <img width="1098" alt="config" src="https://user-images.githubusercontent.com/40535130/222991562-b99888b2-cf5f-4c39-8fc3-834113772c24.png">
 
-#### 8. Edit the PowerShell script file in a PowerShell editor
+### 8. Edit the PowerShell script file in a PowerShell editor
 ------------
 - Open your preferred PowerShell editor
 - edit the PowerShell script file readnugetversion.ps1 in a PowerShell editor
 <img width="853" alt="powershell editor" src="https://user-images.githubusercontent.com/40535130/222991828-350c14c2-4292-49c9-a3d5-b39f1e4fa3d0.png">
 
 
-#### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
+### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
 ------------
 	# restore NuGet package AutoMapper version 12.0.1
 	$nupkgName = "AutoMapper.12.0.1.nupkg"
@@ -92,7 +92,7 @@ f. Copy the generated token as it will not be displayed again.
     Invoke-WebRequest -Uri $nugetUrl -OutFile $nupkgPath
 	}
 
-#### 12. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
+### 12. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
 ------------
 	# read the version from the nuspec file and write to console
 	$nuspecPath = Join-Path $nugetFolderPath "AutoMapper.12.0.1.nuspec"
@@ -101,7 +101,7 @@ f. Copy the generated token as it will not be displayed again.
 	$version = $nuspec.package.metadata.version
 	Write-TimestampedOutput "The version of the NuGet package is $version"
 
-#### 13. Push the NuGet package into the DemoFeed in Azure Artifacts
+### 13. Push the NuGet package into the DemoFeed in Azure Artifacts
 ------------
 	# push NuGet package into DemoFeed in Azure Artifacts
 	$feedUrl = "https://pkgs.dev.azure.com/<your-organization>/_packaging/DemoFeed/nuget/v3/index.json"
@@ -109,27 +109,27 @@ f. Copy the generated token as it will not be displayed again.
 	Write-TimestampedOutput "Pushing NuGet package to $feedUrl ..."
 	nuget.exe push $nupkgPath -Source $feedUrl -ApiKey $apiKey
 - note: you need to replace `<your-organization>` and `<your-api-key>`
-#### 14. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
+### 14. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
 ------------
 	# change version of nuspec file to 14.1.3
 	$newVersion = "14.1.3"
 	$nuspec.package.metadata.version = $newVersion
 	$nuspec.Save($nuspecPath)
 
-#### 15. Read the nuspec file again and write to console the (new) version from the file
+### 15. Read the nuspec file again and write to console the (new) version from the file
 ------------
 	# read new version from nuspec file and write to console
 	[xml]$nuspec = Get-Content $nuspecPath
 	$version = $nuspec.package.metadata.version
 	Write-TimestampedOutput "The new version of the NuGet package is $version"
 
-#### 16. Write a PowerShell function so each output line in the console will have a timestamp prefix
+### 16. Write a PowerShell function so each output line in the console will have a timestamp prefix
 ------------
 	function Write-TimestampedOutput($message) {
     Write-Host ("[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $message)
 }
 
-#### 17. finally, Run the PowerShell script and saved it in the Git repo
+### 17. finally, Run the PowerShell script and saved it in the Git repo
 
 
 
