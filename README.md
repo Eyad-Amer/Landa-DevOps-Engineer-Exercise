@@ -110,7 +110,7 @@ please have prerequisites installed on your computer.
 	$apiKey = "<your-api-key>"
 	Write-TimestampedOutput "Pushing NuGet package to $feedUrl ..."
 	nuget.exe push $nupkgPath -Source $feedUrl -ApiKey $apiKey
-- note: you need to replace <your-organization> and <your-api-key> 
+- note: you need to replace `<your-organization>` and `<your-api-key>`
 #### 14. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
 ------------
 	# change version of nuspec file to 14.1.3
