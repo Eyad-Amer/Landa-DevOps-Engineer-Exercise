@@ -72,25 +72,36 @@ f. Copy the generated token as it will not be displayed again.
 - edit the PowerShell script file readnugetversion.ps1 in a PowerShell editor
 <img width="853" alt="powershell editor" src="https://user-images.githubusercontent.com/40535130/222991828-350c14c2-4292-49c9-a3d5-b39f1e4fa3d0.png">
 
-
-### 11. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
+### 9. Write a PowerShell function so each output line in the console will have a timestamp prefix
 ------------
-	# restore NuGet package AutoMapper version 12.0.1
-	$nupkgName = "AutoMapper.12.0.1.nupkg"
-	$nugetUrl = "https://www.nuget.org/api/v2/package/AutoMapper/12.0.1"
-	$nugetFolderPath = "$PSScriptRoot\packages"
+- The function prepend timestamp to output
 
-	# create packages folder if it doesn't exist
-	if (-not (Test-Path $nugetFolderPath)) {
-    New-Item -ItemType Directory -Path $nugetFolderPath | Out-Null
-	}
+		function Write-TimestampedOutput($message) {
+    		Write-Host ("[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd  HH:mm:ss"), $message)
+		}
 
-	# download NuGet package if it doesn't exist
-	$nupkgPath = Join-Path $nugetFolderPath $nupkgName
-	if (-not (Test-Path $nupkgPath)) {
-    Write-TimestampedOutput "Downloading NuGet package from $nugetUrl ..."
-    Invoke-WebRequest -Uri $nugetUrl -OutFile $nupkgPath
-	}
+### 10. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
+------------
+- Before proceeding, it is important to verify that the NuGet package manager is installed in your PowerShell environment. In case it is not installed, you can use the following command to install it:
+		Install-PackageProvider -Name NuGet -Force
+
+- Restore a NuGet package AutoMapper version 12.0.1 from public repository, you can use the following command to install it:
+		# first, check if the package is already installed
+		if (Get-Package $packageName -ErrorAction SilentlyContinue) {
+    	Write-TimestampedOutput "Package $packageName is already installed."
+    	$installedVersion = (Get-Package $packageName).Version
+    	Write-TimestampedOutput "Installed version: $installedVersion"
+    	# If the installed version is not the required version, uninstall it
+    	if ($installedVersion -ne $packageVersion) {
+        	Uninstall-Package $packageName -Force
+        	Write-TimestampedOutput "Uninstalled package $packageName version $installedVersion."
+   		 }
+		}
+		# Install the package if it's not already installed
+		else {
+    		Install-Package $packageName -RequiredVersion $packageVersion -Source $nugetUrl
+    		Write-TimestampedOutput "Installed package $packageName version $packageVersion."
+		}
 
 ### 12. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
 ------------
@@ -125,8 +136,9 @@ f. Copy the generated token as it will not be displayed again.
 
 ### 16. Write a PowerShell function so each output line in the console will have a timestamp prefix
 ------------
-	function Write-TimestampedOutput($message) {
-    Write-Host ("[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $message)
+- The function prepend timestamp to output
+function Write-TimestampedOutput($message) {
+    Write-Host ("[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $message)
 }
 
 ### 17. finally, Run the PowerShell script and saved it in the Git repo
