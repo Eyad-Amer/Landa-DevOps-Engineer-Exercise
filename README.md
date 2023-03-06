@@ -83,63 +83,84 @@ f. Copy the generated token as it will not be displayed again.
 ### 10. Restore a NuGet package AutoMapper version 12.0.1 from public repository `https://www.nuget.org/`
 ------------
 - Before proceeding, it is important to verify that the NuGet package manager is installed in your PowerShell environment. In case it is not installed, you can use the following command to install it:
+
 		Install-PackageProvider -Name NuGet -Force
 
 - Restore a NuGet package AutoMapper version 12.0.1 from public repository, you can use the following command to install it:
+
 		# first, check if the package is already installed
-		if (Get-Package $packageName -ErrorAction SilentlyContinue) {
-    	Write-TimestampedOutput "Package $packageName is already installed."
+		if (Get-Package "autoMapper" -ErrorAction SilentlyContinue) {
+    	Write-TimestampedOutput "Package "autoMapper" is already installed."
     	$installedVersion = (Get-Package $packageName).Version
     	Write-TimestampedOutput "Installed version: $installedVersion"
     	# If the installed version is not the required version, uninstall it
-    	if ($installedVersion -ne $packageVersion) {
-        	Uninstall-Package $packageName -Force
-        	Write-TimestampedOutput "Uninstalled package $packageName version $installedVersion."
+    	if ($installedVersion -ne "12.0.1") {
+        	Uninstall-Package "autoMapper" -Force
+        	Write-TimestampedOutput "Uninstalled package "autoMapper" version $installedVersion."
    		 }
 		}
 		# Install the package if it's not already installed
 		else {
-    		Install-Package $packageName -RequiredVersion $packageVersion -Source $nugetUrl
-    		Write-TimestampedOutput "Installed package $packageName version $packageVersion."
+    		Install-Package "autoMapper" -RequiredVersion "12.0.1" -Source "https://www.nuget.org/api/v2/"
+    		Write-TimestampedOutput "Installed package "autoMapper" version "12.0.1""
 		}
 
-### 12. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
+### 11. Read the version of the nuspec file of the NuGet package AutoMapper and write it to console
 ------------
-	# read the version from the nuspec file and write to console
-	$nuspecPath = Join-Path $nugetFolderPath "AutoMapper.12.0.1.nuspec"
-	Expand-Archive -Path $nupkgPath -DestinationPath $nugetFolderPath -Force
-	[xml]$nuspec = Get-Content $nuspecPath
-	$version = $nuspec.package.metadata.version
-	Write-TimestampedOutput "The version of the NuGet package is $version"
+-  Read the version information from the nuspec file
 
-### 13. Push the NuGet package into the DemoFeed in Azure Artifacts
-------------
-	# push NuGet package into DemoFeed in Azure Artifacts
-	$feedUrl = "https://pkgs.dev.azure.com/<your-organization>/_packaging/DemoFeed/nuget/v3/index.json"
-	$apiKey = "<your-api-key>"
-	Write-TimestampedOutput "Pushing NuGet package to $feedUrl ..."
-	nuget.exe push $nupkgPath -Source $feedUrl -ApiKey $apiKey
-- note: you need to replace `<your-organization>` and `<your-api-key>`
-### 14. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
-------------
-	# change version of nuspec file to 14.1.3
-	$newVersion = "14.1.3"
-	$nuspec.package.metadata.version = $newVersion
-	$nuspec.Save($nuspecPath)
+		[xml]$nuspec = Get-Content "C:\Users\eyada\.nuget\packages\automapper\12.0.1\automapper.nuspec"
+		$version = $nuspec.package.metadata.version
+		Write-TimestampedOutput "The version of the NuGet package is $version"
 
-### 15. Read the nuspec file again and write to console the (new) version from the file
+### 12. Push the NuGet package into the DemoFeed in Azure Artifacts
 ------------
-	# read new version from nuspec file and write to console
-	[xml]$nuspec = Get-Content $nuspecPath
-	$version = $nuspec.package.metadata.version
-	Write-TimestampedOutput "The new version of the NuGet package is $version"
+- Ensure you have installed the latest version of the Azure Artifacts credential provider from the "Get the tools" menu.
+- Add a nuget.config file to your project:
 
-### 16. Write a PowerShell function so each output line in the console will have a timestamp prefix
+		<?xml version="1.0" encoding="utf-8"?>
+		<configuration>
+  		<packageSources>
+    		<clear />
+    		<add key="DemoFeed" value="https://pkgs.dev.azure.com/Landa-ExerciseOrg/ExerciseProject/_packaging/DemoFeed/nuget/v3/index.json" />
+  		</packageSources>
+		</configuration>
+
+- Install the NuGet.CommandLine package if it is not already installed
+		Install-Package NuGet.CommandLine
+
+- Authenticate to your Azure DevOps organization
+		nuget.exe sources Add -Name "DemoFeed" -Source "https://pkgs.dev.azure.com/Landa-ExerciseOrg/ExerciseProject/_packaging/DemoFeed/nuget/v3/index.json" -UserName <nugetAPIName> -Password <nugetAPIKey>
+
+- push NuGet package into DemoFeed in Azure Artifacts
+
+		# List all packages in the "DemoFeed" NuGet source
+		$packages = nuget.exe list -Source "DemoFeed"
+
+		# Search for the package and check its version number
+		$package = $packages | where { $_ -like ""autoMapper" "12.0.1"*" }
+		if ($package) {
+    		# The package is already in the NuGet source
+    		Write-TimestampedOutput "The package '"autoMapper" "12.0.1"' is already in the 'DemoFeed' NuGet source."
+    		Write-TimestampedOutput "Please remove it before attempting to push it again."
+		} else {
+    		# The package is not in the NuGet source
+    		Write-TimestampedOutput "The package '"autoMapper" "12.0.1"' is not in the 'DemoFeed' NuGet source, we will push it"
+    		# Push the NuGet package to the feed
+    		nuget.exe push -Source "DemoFeed" -ApiKey az automapper.12.0.1.nupkg
+
+### 13. Change the version of the nuspec file of the NuGet package AutoMapper from 12.0.1 to 14.1.3
 ------------
-- The function prepend timestamp to output
-function Write-TimestampedOutput($message) {
-    Write-Host ("[{0}] {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $message)
-}
+- find the path to the nuspec file of the package
+		$nuspecPath = (Get-ChildItem -Path "C:\Users\eyada\.nuget\packages\autoMapper\12.0.1" -Filter *.nuspec).FullName
+
+- Change the version number in the nuspec file
+		(Get-Content $nuspecPath) | ForEach-Object { $_ -replace '12.0.1', '14.1.3' } | Set-Content $nuspecPath
+
+### 14. Read the nuspec file again and write to console the (new) version from the file
+------------
+		$version = $nuspec.package.metadata.version
+		Write-TimestampedOutput "The version of the NuGet package is $version"
 
 ### 17. finally, Run the PowerShell script and saved it in the Git repo
 
