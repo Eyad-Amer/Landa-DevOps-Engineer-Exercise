@@ -165,6 +165,14 @@ f. Copy the generated token as it will not be displayed again.
 
 ### 15. finally, Run the PowerShell script and saved it in the Git repo
 
+- screenshot of the execution of the script:
+<img width="802" alt="done" src="https://user-images.githubusercontent.com/40535130/223075775-aec069ae-51a7-444f-bd56-8f1291a8d0a9.png">
+
+- screenshot of the files list in Git repo:
+<img width="859" alt="repo" src="https://user-images.githubusercontent.com/40535130/223076166-63b86c9c-3a58-4e2c-9dad-fb1c9ec7c38c.png">
+
+- screenshot of the Azure Artifacts feed:
+<img width="859" alt="push feed to artifact" src="https://user-images.githubusercontent.com/40535130/223076443-f2d85440-bb09-45c8-b461-4e1b2f8b4652.png">
 
 
 
