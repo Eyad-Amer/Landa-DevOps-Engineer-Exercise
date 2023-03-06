@@ -159,6 +159,7 @@ f. Copy the generated token as it will not be displayed again.
 
 ### 14. Read the nuspec file again and write to console the (new) version from the file
 ------------
+		[xml]$nuspec = Get-Content "C:\Users\eyada\.nuget\packages\automapper\12.0.1\automapper.nuspec"
 		$version = $nuspec.package.metadata.version
 		Write-TimestampedOutput "The version of the NuGet package is $version"
 
