@@ -162,7 +162,7 @@ f. Copy the generated token as it will not be displayed again.
 		$version = $nuspec.package.metadata.version
 		Write-TimestampedOutput "The version of the NuGet package is $version"
 
-### 17. finally, Run the PowerShell script and saved it in the Git repo
+### 15. finally, Run the PowerShell script and saved it in the Git repo
 
 
 
